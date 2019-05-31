@@ -1,6 +1,6 @@
 document.addEventListener("deviceready", function () {
+
     function onSuccess(contacts) {
-alert(contacts)
         $("#contacts-list").empty();
 
         if (contacts.length == 0) {
@@ -15,22 +15,19 @@ alert(contacts)
     };
 
     function onError(contactError) {
-        // alert(contactError);
         $.mobile.loading("hide");
-        alert(contactError);
+        alert("onError!");
     };
 
     function searchForContact() {
         $.mobile.loading("show");
 
         var options = new ContactFindOptions();
-        // alert(options);
         options.filter = $("#searchTerm").val();
         options.multiple = true;
         //options.desiredFields = [navigator.contacts.fieldType.id];
         options.hasPhoneNumber = true;
         var fields = ["displayName", "name",];
-        alert(navigator.contacts.find);
         navigator.contacts.find(fields, onSuccess, onError, options);
     }
 
